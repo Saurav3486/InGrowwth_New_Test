@@ -1,0 +1,78 @@
+## Setup and Running Instructions
+
+Follow these steps to get the website and its backend running locally on your machine.
+
+### Prerequisites
+
+* **Python 3.x** installed on your system. You can download it from [python.org](https://www.python.org/downloads/).
+* A **Gmail account** (or other email provider that supports SMTP) if you want to test email sending.
+    * **For Gmail users:** If you have 2-Factor Authentication enabled (which is recommended!), you'll need to generate an **App Password** for the `SENDER_PASSWORD` in your `.env` file. Your regular Gmail password will NOT work for SMTP. Search "Gmail App Passwords" in Google for instructions.
+
+### 1. Install Backend Dependencies
+
+1.  Open your terminal or command prompt.
+2.  Navigate to the root directory of your project:
+    ```bash
+    cd path/to/ingrowwth_innovations_website
+    ```
+3.  (Optional but Recommended) Create a Python virtual environment to manage dependencies:
+    ```bash
+    python -m venv venv
+    ```
+4.  Activate the virtual environment:
+    * **On Windows:** `.\venv\Scripts\activate`
+    * **On macOS/Linux:** `source venv/bin/activate`
+5.  Install the required Python packages using `requirements.txt`:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+### 2. Configure Backend Environment Variables
+
+1.  Go into the `backend` folder:
+    ```bash
+    cd backend
+    ```
+2.  Open the `.env` file in a text editor.
+3.  Fill in your actual email credentials:
+    ```
+    SENDER_EMAIL=your_sending_email@gmail.com
+    SENDER_PASSWORD=your_gmail_app_password_here
+    RECEIVER_EMAIL=your_company_email@example.com
+    ```
+    * `SENDER_EMAIL`: This is the email address that the contact form messages will be sent *from*.
+    * `SENDER_PASSWORD`: The password for `SENDER_EMAIL`. For Gmail, this *must* be an App Password if you use 2FA.
+    * `RECEIVER_EMAIL`: This is the email address where you want to *receive* the contact form messages.
+
+### 3. Run the Backend Server
+
+1.  Make sure you are still in the `backend` folder in your terminal (and your virtual environment is active).
+2.  Run the Flask application:
+    ```bash
+    python app.py
+    ```
+    You should see output similar to: `* Running on http://127.0.0.1:5000`
+    Keep this terminal window open while you want the backend to be active.
+
+### 4. Open the Frontend Website
+
+1.  Navigate to the `frontend` folder in your file explorer.
+2.  Double-click the `index.html` file. It will open in your default web browser.
+
+    Alternatively, you can open your browser and type the path to your `index.html` file (e.g., `file:///C:/path/to/ingrowwth_innovations_website/frontend/index.html`).
+
+### 5. Test the Contact Form
+
+* Scroll down to the "Contact Us" section on the website.
+* Fill in the form fields.
+* Click the "Send Your Message" button.
+* If the backend is running correctly and your email credentials are set up, you should see an alert "Your message has been sent successfully!" on the website, and you should receive an email at your `RECEIVER_EMAIL` address.
+* Check your terminal where `app.py` is running for any error messages if the email sending fails.
+
+---
+
+### **Important Considerations for Deployment (Making it Live):**
+
+* **Hosting:** For a live website, you'll need to deploy your `frontend` files to a static site host (like Netlify, Vercel, GitHub Pages) and your `backend` Flask application to a cloud server or platform (like Render, Heroku, AWS Elastic Beanstalk, Google Cloud Run). The `http://127.0.0.1:5000` URL in `index.html` will need to be updated to your *actual deployed backend URL*.
+* **Security:** For production, ensure `debug=False` in `app.run()` and configure CORS properly by specifying your exact frontend domain(s) instead of `*`.
+* **Email Sending:** Rely on a robust transactional email service (like SendGrid, Mailgun, AWS SES) for reliable and scalable email delivery in a production environment.
