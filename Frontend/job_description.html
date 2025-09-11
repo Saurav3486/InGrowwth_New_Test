@@ -297,8 +297,6 @@
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 text-center md:text-left">
             <div class="col-span-full md:col-span-1 lg:col-span-1 flex flex-col items-center md:items-start">
                 <div class="flex items-center mb-4">
-                    <!--<i data-lucide="trending-up" class="w-8 h-8 text-blue-400 mr-3 transform rotate-6"></i>
-                                    <!-- Logo -->
                     <a href="#hero" class="flex items-center shrink-0">
                         <img src="assets/images/company_logo2.png" alt="InGrowwth Innovations Logo"
                             class="h-36 md:h-20 lg:h-20 w-auto" />
@@ -360,13 +358,10 @@
                     </li>
                     <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Data
                             Analytics</a></li>
-                    </li>
                     <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">UI/UX &
                             Product Design</a></li>
-                    </li>
                     <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Blockchain
                             Solutions</a></li>
-                    </li>
                     <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">ERP
                             Solutions</a></li>
                 </ul>
@@ -500,30 +495,30 @@
                         "Experience with data manipulation and analysis tools (e.g., SQL, Pandas, NumPy).",
                         "Excellent problem-solving skills and the ability to communicate complex data insights clearly."
                     ],
-                },
+                }
             };
-                    // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const closeIcon = document.getElementById('close-icon');
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-        });
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
 
-        // Close mobile menu when a link is clicked
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                menuIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
             });
-        });
 
+            // Close mobile menu when a link is clicked
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                });
+            });
 
             // ---------- Helper functions ----------
             const $ = (sel, root = document) => root.querySelector(sel);
@@ -888,6 +883,7 @@
 </body>
 
 </html>
+
 
 <!--<!DOCTYPE html>
 <html lang="en">
