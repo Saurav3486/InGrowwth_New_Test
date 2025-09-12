@@ -244,21 +244,22 @@
 
         <section id="about" class="py-20 sm:py-32 bg-white overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
                 <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
 
-                    <div class="mb-12 lg:mb-0 relative hidden md:block animate-fade-in-up">
+                    <div class="mb-12 lg:mb-0 relative block animate-fade-in-up">
                         <!-- Bigger Straight Video -->
-                        <video autoplay muted loop controls
-                            class="rounded-3xl shadow-2xl w-full h-[500px] object-cover transition duration-500 ease-in-out">
+                        <video autoplay muted loop playsinline controls
+                            class="rounded-3xl shadow-2xl w-full h-[220px] sm:h-[300px] md:h-[460px] lg:h-[500px] object-cover transition duration-500 ease-in-out">
                             <source src="assets/videos/about-us.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
 
-                        <!-- Experience Badge (straight + lower) -->
+                        <!-- Experience Badge -->
                         <div
-                            class="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-blue-100 p-6 rounded-2xl shadow-xl transition duration-500 ease-in-out">
-                            <i data-lucide="cube" class="w-12 h-12 text-blue-600 mb-2"></i>
-                            <p class="text-lg font-semibold text-gray-800">5+ Years Experience</p>
+                            class="absolute -bottom-10 sm:-bottom-16 left-1/2 transform -translate-x-1/2 bg-blue-100 px-4 py-3 sm:p-6 rounded-2xl shadow-xl transition duration-500 ease-in-out text-center">
+                            <i data-lucide="cube" class="w-8 sm:w-12 h-8 sm:h-12 text-blue-600 mb-2"></i>
+                            <p class="text-base sm:text-lg font-semibold text-gray-800">5+ Years Experience</p>
                         </div>
                     </div>
                     <div class="animate-fade-in-up delay-100">
