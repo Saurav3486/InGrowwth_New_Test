@@ -206,10 +206,81 @@
             }
         }
 
-        /* Safety: remove any inline/tailwind width classes on the image in HTML (w-16 h-16).
-           Make sure your HTML uses:
-           <a class="whatsapp-fab" ...><img class="whatsapp-logo" src="..."></a>
-        */
+        /* extra safety for logo sizing across all devices */
+        .footer-logo {
+            width: clamp(120px, 18vw, 220px);
+            /* you already added this */
+            height: auto;
+            object-fit: contain;
+            max-height: 140px;
+            /* hard cap preventing vertical overflow on narrow-but-tall viewports */
+            display: block;
+            flex-shrink: 0;
+            /* prevents the logo from shrinking inside flex containers */
+        }
+
+        /* 2) Ensure the logo container reserves space and centers nicely */
+        .footer-logo-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 3) Provide different visual balance per breakpoint */
+        @media (min-width: 640px) {
+
+            /* sm and up */
+            .footer-logo {
+                width: clamp(140px, 14vw, 200px);
+                max-height: 130px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+
+            /* lg and up */
+            .footer-logo {
+                width: clamp(160px, 12vw, 240px);
+                max-height: 150px;
+            }
+        }
+
+        /* 4) Keep text readable and balanced */
+        .footer-intro {
+            text-align: center;
+            max-width: 420px;
+            margin: 0 auto;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        @media (min-width: 768px) {
+            .footer-intro {
+                text-align: left;
+                font-size: 15px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-intro {
+                font-size: 16px;
+            }
+        }
+
+        /* 5) Use break-word for contact fields so they never overflow */
+        .footer-contact a,
+        .footer-contact p {
+            word-break: break-word;
+        }
+
+        /* 6) Optional: add a subtle transform so the logo is visually consistent on mid-width screens */
+        @media (min-width: 560px) and (max-width: 900px) {
+            .footer-logo {
+                transform: translateY(-2px);
+            }
+
+            /* tiny visual nudge */
+        }
     </style>
 
 </head>
@@ -1149,120 +1220,100 @@
         <img src="assets/images/whatsapp.png" alt="WhatsApp Logo" class="whatsapp-logo">
     </a>
 
-    <footer class="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8 rounded-t-3xl shadow-inner">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 text-center md:text-left">
+    <footer class="bg-gray-900 text-white py-10 px-4 sm:px-6 lg:px-12 rounded-t-3xl shadow-inner">
+        <div class="max-w-7xl mx-auto">
+            <!-- Improved responsive grid:
+             1 column on xs, 2 on sm, 3 on md, 4 on lg+ -->
+            <div class="footer-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-            <!-- Logo + Intro -->
-            <div class="col-span-full md:col-span-1 lg:col-span-1 flex flex-col items-center md:items-start">
-                <div class="flex items-center mb-4">
-                    <a href="#hero" class="flex items-center shrink-0">
+                <!-- Logo + Intro -->
+                <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <a href="#hero" class="inline-flex items-center justify-center sm:justify-start mb-3">
                         <img src="assets/images/company_logo2.png" alt="InGrowwth Innovations Logo"
-                            class="h-20 sm:h-24 md:h-20 lg:h-20 w-auto max-w-full object-contain" />
+                            class="footer-logo flex-shrink-0 transition-all duration-200" />
                     </a>
+
+                    <p class="text-gray-400 leading-relaxed mb-3 text-sm sm:text-base max-w-[320px]">
+                        Innovating for a brighter digital future. We are committed to delivering excellence and driving
+                        success for businesses worldwide.
+                    </p>
+
+                    <div class="flex space-x-3 mt-2 justify-center sm:justify-start">
+                        <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                            <i data-lucide="linkedin" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                            <i data-lucide="twitter" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition transform hover:scale-110">
+                            <i data-lucide="github" class="w-6 h-6"></i>
+                        </a>
+                    </div>
                 </div>
-                <p class="text-gray-400 leading-relaxed mb-4 text-center md:text-left">
-                    Innovating for a brighter digital future. We are committed to delivering excellence and driving
-                    success for businesses worldwide.
+
+                <!-- Quick Links -->
+                <div class="flex flex-col items-center sm:items-start">
+                    <h3 class="text-base sm:text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm sm:text-base">
+                        <li><a href="#hero" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white">Portfolio</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white">Testimonials</a></li>
+                        <li><a href="#careers" class="text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Our Services -->
+                <div class="flex flex-col items-center sm:items-start">
+                    <h3 class="text-base sm:text-lg font-semibold text-white mb-4">Our Services</h3>
+                    <ul class="space-y-2 text-sm sm:text-base max-w-[260px]">
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Web Development</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Mobile App Development</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Cloud Solutions</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">AI & Machine Learning</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Cybersecurity</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Data Analytics</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">UI/UX & Product Design</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="flex flex-col items-center sm:items-start">
+                    <h3 class="text-base sm:text-lg font-semibold text-white mb-4">Contact Info</h3>
+                    <ul class="space-y-3 text-sm sm:text-base">
+                        <li class="flex items-start gap-3 max-w-[320px]">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-blue-400 mt-1 flex-shrink-0"></i>
+                            <p class="text-gray-400 break-words">A-102 Oscar Hills, Hanspura, Ahmedabad</p>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-blue-400 flex-shrink-0"></i>
+                            <a href="tel:+918200229099" class="text-gray-400 hover:text-white">+91 8200229099</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-blue-400 mt-1 flex-shrink-0"></i>
+                            <a href="mailto:info@ingrowwthinnovations.in"
+                                class="text-gray-400 hover:text-white break-words max-w-[260px]">
+                                info@ingrowwthinnovations.in
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p class="text-gray-500 text-xs sm:text-sm mb-3">
+                    &copy; <span id="current-year"></span> InGrowwth Innovations. All rights reserved. Designed with
+                    <span class="text-red-500">&hearts;</span>
                 </p>
-                <div class="flex space-x-4 mt-4">
-                    <a href="#"
-                        class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-125">
-                        <i data-lucide="linkedin" class="w-7 h-7"></i>
-                    </a>
-                    <a href="#"
-                        class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-125">
-                        <i data-lucide="twitter" class="w-7 h-7"></i>
-                    </a>
-                    <a href="#"
-                        class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-125">
-                        <i data-lucide="github" class="w-7 h-7"></i>
-                    </a>
+                <div class="flex justify-center space-x-4 text-xs sm:text-sm">
+                    <a href="Privacy-Policy.html" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="term-of-services.html" class="text-gray-400 hover:text-white">Terms of Service</a>
                 </div>
-            </div>
-
-            <!-- Quick Links -->
-            <div class="col-span-full md:col-span-1 lg:col-span-1">
-                <h3 class="text-xl font-semibold text-white mb-6">Quick Links</h3>
-                <ul class="space-y-3">
-                    <li><a href="#hero" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
-                    <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300">About Us</a>
-                    </li>
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a>
-                    </li>
-                    <li><a href="#portfolio"
-                            class="text-gray-400 hover:text-white transition duration-300">Portfolio</a>
-                    </li>
-                    <li><a href="#testimonials"
-                            class="text-gray-400 hover:text-white transition duration-300">Testimonials</a></li>
-                    <li><a href="#careers" class="text-gray-400 hover:text-white transition duration-300">Careers</a>
-                    </li>
-                    <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Our Services (now always visible) -->
-            <div class="hidden lg:block">
-                <h3 class="text-xl font-semibold text-white mb-6">Our Services</h3>
-                <ul class="space-y-3">
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Web
-                            Development</a></li>
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Mobile App
-                            Development</a></li>
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Cloud
-                            Solutions</a></li>
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">AI & Machine
-                            Learning</a></li>
-                    <li><a href="#services"
-                            class="text-gray-400 hover:text-white transition duration-300">Cybersecurity</a>
-                    </li>
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Data
-                            Analytics</a></li>
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">UI/UX &
-                            Product
-                            Design</a></li>
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Blockchain
-                            Solutions</a></li>
-                    <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">ERP
-                            Solutions</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="col-span-full md:col-span-1 lg:col-span-1">
-                <h3 class="text-xl font-semibold text-white mb-6">Contact Info</h3>
-                <ul class="space-y-3">
-                    <li class="flex items-center md:justify-start justify-center">
-                        <i data-lucide="map-pin" class="w-5 h-5 text-blue-400 mr-3 flex-shrink-0"></i>
-                        <p class="text-gray-400">A-102 Oscar Hills, Hanspura, Ahmedabad</p>
-                    </li>
-                    <li class="flex items-center md:justify-start justify-center">
-                        <i data-lucide="phone" class="w-5 h-5 text-blue-400 mr-3 flex-shrink-0"></i>
-                        <a href="tel:+918200229099" class="text-gray-400 hover:text-white transition duration-300">+91
-                            8200229099</a>
-                    </li>
-                    <li class="flex items-center md:justify-start justify-center">
-                        <i data-lucide="mail" class="w-5 h-5 text-blue-400 mr-3 flex-shrink-0"></i>
-                        <a href="mailto:info@ingrowwthinnovations.in"
-                            class="text-gray-400 hover:text-white transition duration-300">info@ingrowwthinnovations.in</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Bottom -->
-        <div class="border-t border-gray-700 mt-10 pt-8 text-center">
-            <p class="text-gray-500 text-sm mb-4">
-                &copy; <span id="current-year"></span> InGrowwth Innovations. All rights reserved. Designed with
-                <span class="text-red-500">&hearts;</span> for modern businesses.
-            </p>
-            <div class="flex justify-center space-x-6">
-                <a href="Privacy-Policy.html" class="text-gray-400 hover:text-white transition duration-300">Privacy
-                    Policy</a>
-                <span class="text-gray-600">|</span>
-                <a href="term-of-services.html" class="text-gray-400 hover:text-white transition duration-300">Terms of
-                    Service</a>
             </div>
         </div>
     </footer>
@@ -1436,6 +1487,9 @@
         if (statsSection) {
             counterObserver.observe(statsSection);
         }
+
+        // small year filler (keep if you had before)
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 
